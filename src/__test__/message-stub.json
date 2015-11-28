@@ -1,0 +1,16 @@
+{
+  "libloc": {
+    "foo": {
+      "messages": {
+        "common": {
+          "common.properties": "foo.prop.greeting = Hello",
+          "common_es_mx.properties": "foo.prop.greeting = Hola"
+        },
+        "uncommon": {
+          "uncommon.properties": "bar.prop.title = Color\nbar.prop.description = Blah",
+          "uncommon_en_GB.properties": "bar.prop.title = Colour"
+        }
+      }
+    }
+  }
+}
