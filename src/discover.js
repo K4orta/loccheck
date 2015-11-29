@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var combineLangs = require('./combine-langs');
+var formatLangs = require('./format-langs');
 
 function readdir(rootpath) {
   var stats = fs.statSync(rootpath);
@@ -22,6 +23,7 @@ function readdir(rootpath) {
 module.exports = rootpath => {
   return new Promise(resolve => {
     var props = readdir(rootpath);
-    resolve(combineLangs(props));
+    var combined = combineLangs(props);
+    resolve(formatLangs(combined));
   });
 };

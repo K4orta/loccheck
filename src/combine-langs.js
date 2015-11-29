@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 function findMaster(files) {
   return _.sortBy(files, fn => {
-    return (fn.match(/_/g) || []).length
+    return (fn.match(/_/g) || []).length;
   })[0];
 };
 

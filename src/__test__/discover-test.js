@@ -1,5 +1,6 @@
 var mock = require('mock-fs');
 var discoverProps = require('../discover');
+var mockProps = require('./message-stub');
 
 describe('The discovery function', done => {
   it('returns an empty array when there are no messages to discover', () => {
@@ -65,7 +66,7 @@ describe('The discovery function', done => {
 
     discoverProps('libloc').then(props => {
       expect(props.length).to.equal(3);
-      expect(props[1]).to.equal('libloc/biz/biz.properties');
+      expect(props[1].mainPath).to.equal('libloc/biz/biz.properties');
     }).then(done, done);
   });
 
@@ -86,7 +87,7 @@ describe('The discovery function', done => {
 
     discoverProps('libloc').then(props => {
       expect(props.every(f => {
-        return f.match(/\.properties$/);
+        return f.mainPath.match(/\.properties$/);
       })).to.equal(true);
     }).then(done, done);
   });
@@ -108,6 +109,13 @@ describe('The discovery function', done => {
 
     discoverProps('libloc').then(props => {
       expect(props.length).to.equal(2);
+    }).then(done, done);
+  });
+
+  it('keeps track of alt languages', done => {
+    mock(mockProps);
+    discoverProps('libloc').then(props => {
+      expect(props[0].langs.length).to.equal(1);
     }).then(done, done);
   });
 });
