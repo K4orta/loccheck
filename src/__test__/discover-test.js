@@ -116,6 +116,14 @@ describe('The discovery function', done => {
     mock(mockProps);
     discoverProps('libloc').then(props => {
       expect(props[0].langs.length).to.equal(1);
+      expect(props[0].langs[0].path).to.equal('libloc/foo/messages/common/common_es_mx.properties');
+    }).then(done, done);
+  });
+
+  it('fills main prop field with properties', done => {
+    mock(mockProps);
+    discoverProps('libloc').then(props => {
+      expect(props.props['foo.prop.greeting']).to.equal('Hello');
     }).then(done, done);
   });
 });

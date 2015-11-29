@@ -6,7 +6,7 @@ function findMaster(files) {
   return _.sortBy(files, fn => {
     return (fn.match(/_/g) || []).length;
   })[0];
-};
+}
 
 function findSameDir(base, paths) {
   return paths.filter(p => {
@@ -20,7 +20,7 @@ function removeLangs(props) {
   }
 
   var i = 0;
-  var sd;
+  var locSet;
 
   do {
     locSet = findSameDir(props[i++], props);

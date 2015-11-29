@@ -9,8 +9,12 @@ module.exports = propFiles => {
 
     return {
       mainPath: file,
-      langs: langFiles.filter(x => {
-        return x !== file;
+      langs: langFiles.filter(filename => {
+        return filename !== file;
+      }).map(filename => {
+        return {
+          path: filename
+        };
       })
     };
   });
