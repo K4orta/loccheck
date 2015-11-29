@@ -1,15 +1,21 @@
 var fs = require('fs');
-// var pat = require('path');
+var path = require('path');
 
-function walk(path) {
-  return new Promise((resolve, reject) => {
-    fs.readdir(path, (err, contents) => {
-      if (err !== null) {
-        reject(err);
-      }
-      resolve(contents);
-    });
+function readdir(rootpath) {
+  var stats = fs.statSync(rootpath);
+  if (stats.isFile()) {
+    return rootpath;
+  }
+  var entities = fs.readdirSync(rootpath);
+  var paths = [];
+  entities.forEach(x => {
+    paths = paths.concat(readdir(path.join(rootpath, x)));
   });
+  return paths;
 }
 
-module.exports = path => walk(path);
+module.exports = rootpath => {
+  return new Promise(resolve => {
+    resolve(readdir(rootpath));
+  });
+};

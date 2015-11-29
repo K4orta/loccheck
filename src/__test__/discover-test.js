@@ -40,12 +40,32 @@ describe('The discovery function', done => {
       libloc: {
         foo: {'foo.properties': 'foo = a'},
         bar: {'bar.properties': 'bar = b'},
-        bzr: {}
+        baz: {}
       }
     });
 
     discoverProps('libloc').then(props => {
       expect(props.length).to.equal(2);
+    }).then(done, done);
+  });
+
+  it('discovers deeply nested prop files', done => {
+    mock({
+      libloc: {
+        biz: {'biz.properties': 'foo = a'},
+        foo: {
+          fiz: {
+            liz: {'foo.properties': 'foo = a'}
+          }
+        },
+        bar: {'bar.properties': 'bar = b'},
+        baz: {}
+      }
+    });
+
+    discoverProps('libloc').then(props => {
+      expect(props.length).to.equal(3);
+      expect(props[1]).to.equal('libloc/biz/biz.properties');
     }).then(done, done);
   });
 });
