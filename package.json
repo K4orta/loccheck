@@ -16,6 +16,7 @@
     "mock-fs": "^3.4.0"
   },
   "dependencies": {
+    "lodash": "^3.10.1",
     "properties": "^1.2.1"
   }
 }

@@ -1,21 +1,27 @@
 var fs = require('fs');
 var path = require('path');
+var combineLangs = require('./combine-langs');
 
 function readdir(rootpath) {
   var stats = fs.statSync(rootpath);
-  if (stats.isFile()) {
+  if (stats.isFile() && rootpath.match(/\.properties$/)) {
     return rootpath;
   }
-  var entities = fs.readdirSync(rootpath);
-  var paths = [];
-  entities.forEach(x => {
-    paths = paths.concat(readdir(path.join(rootpath, x)));
-  });
-  return paths;
+
+  if (stats.isDirectory()) {
+    var entities = fs.readdirSync(rootpath);
+    var paths = [];
+    entities.forEach(x => {
+      paths = paths.concat(readdir(path.join(rootpath, x)));
+    });
+    return paths;
+  }
+  return [];
 }
 
 module.exports = rootpath => {
   return new Promise(resolve => {
-    resolve(readdir(rootpath));
+    var props = readdir(rootpath);
+    resolve(combineLangs(props));
   });
 };

@@ -68,4 +68,46 @@ describe('The discovery function', done => {
       expect(props[1]).to.equal('libloc/biz/biz.properties');
     }).then(done, done);
   });
+
+  it('only returns properties files', done => {
+    mock({
+      libloc: {
+        foo: {
+          'foo.properties': 'foo = a'
+        },
+        bar: {
+          'bar.properties': 'bar = b'
+        },
+        baz: {
+          'baz.java': 'baz = b'
+        }
+      }
+    });
+
+    discoverProps('libloc').then(props => {
+      expect(props.every(f => {
+        return f.match(/\.properties$/);
+      })).to.equal(true);
+    }).then(done, done);
+  });
+
+  it('returns only one main file per directory', done => {
+    mock({
+      libloc: {
+        foo: {
+          'foo.properties': 'foo = a',
+          'foo_es_MX.properties': 'foo = a'
+        },
+        bar: {
+          'bar.properties': 'bar = b',
+          'bar_es_MX.properties': 'bar = b',
+          'bar_fr_FR.properties': 'bar = b'
+        }
+      }
+    });
+
+    discoverProps('libloc').then(props => {
+      expect(props.length).to.equal(2);
+    }).then(done, done);
+  });
 });
