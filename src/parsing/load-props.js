@@ -7,7 +7,10 @@ module.exports = path => {
       if (err !== null) {
         reject(err);
       }
-      resolve(props.parse(String(data)));
+      resolve({
+        path: path,
+        props: props.parse(String(data))
+      });
     });
   });
 };

@@ -123,7 +123,18 @@ describe('The discovery function', done => {
   it('fills main prop field with properties', done => {
     mock(mockProps);
     discoverProps('libloc').then(props => {
-      expect(props.props['foo.prop.greeting']).to.equal('Hello');
+      expect(props[0].props['foo.prop.greeting']).to.equal('Hello');
     }).then(done, done);
+  });
+
+  it('fills sub languages with properties', done => {
+    mock(mockProps);
+    discoverProps('libloc').then(props => {
+      expect(props[0].langs[0].props['foo.prop.greeting']).to.equal('Hola');
+    }).then(done, done);
+  });
+
+  after(() => {
+    mock.restore();
   });
 });

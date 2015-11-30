@@ -1,4 +1,4 @@
-var propLoader = require('../load-props');
+var propLoader = require('../parsing/load-props');
 var mock = require('mock-fs');
 
 describe('the prop loading function', () => {
@@ -25,7 +25,7 @@ describe('the prop loading function', () => {
     var loaded = propLoader('libloc/foo/messages/common/common.properties');
     loaded
       .then(props => {
-        expect(props['foo.prop.greeting']).to.equal('Hello');
+        expect(props.props['foo.prop.greeting']).to.equal('Hello');
       }).then(done, done);
   });
 
@@ -36,5 +36,9 @@ describe('the prop loading function', () => {
         expect(err.message).to.equal('ENOENT, no such file or directory \'libloc/foo/messages/common/blah.properties\'');
       })
       .then(done, done);
+  });
+
+  after(() => {
+    mock.restore();
   });
 });

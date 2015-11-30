@@ -24,6 +24,6 @@ module.exports = rootpath => {
   return new Promise(resolve => {
     var props = readdir(rootpath);
     var combined = combineLangs(props);
-    resolve(formatLangs(combined));
+    Promise.all(formatLangs(combined)).then(resolve);
   });
 };

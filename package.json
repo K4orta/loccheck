@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --harmony --require src/test/test-init.js src/**/*-test.js"
+    "test": "mocha --harmony --recursive --require src/test/test-init.js src/**/*-test.js"
   },
   "author": "",
   "license": "ISC",
