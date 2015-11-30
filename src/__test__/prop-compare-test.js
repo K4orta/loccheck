@@ -18,5 +18,13 @@ describe('the prop compare function', () => {
       'prop.foo': 'Hola'
     };
     expect(propCompare(stubA, stubB)).to.equal(0.5);
+    stubA = {
+      'prop.foo': 'Hello',
+      'prop.bar': 'Goodbye',
+      'prop.baz': 'Welcome',
+      'prop.qux': 'Thanks'
+    };
+
+    expect(propCompare(stubA, stubB)).to.equal(0.25);
   });
 });
