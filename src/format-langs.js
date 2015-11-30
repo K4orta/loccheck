@@ -4,9 +4,10 @@ var loadProps = require('./parsing/load-props');
 
 module.exports = propFiles => {
   return propFiles.map(file => {
-    var langFiles = fs.readdirSync(path.dirname(file)).map(fn => {
-      return path.join(path.dirname(file), fn);
-    });
+    var langFiles = fs.readdirSync(path.dirname(file))
+      .map(fn => {
+        return path.join(path.dirname(file), fn);
+      });
 
     return new Promise(resolve => {
       Promise.all(langFiles.map(lang => {
