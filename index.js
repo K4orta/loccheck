@@ -1,7 +1,10 @@
 var discover = require('./src/discover');
-console.log('It runs!');
+var reporter = require('./src/reporter');
 
 discover('.')
   .then(props => {
-    console.log(props);
+    props.forEach(prop => {
+      var rp = reporter(prop);
+      console.log(rp);
+    });
   });
