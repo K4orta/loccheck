@@ -66,7 +66,7 @@ describe('The discovery function', done => {
 
     discoverProps('libloc').then(props => {
       expect(props.length).to.equal(3);
-      expect(props[1].mainPath).to.equal('libloc/biz/biz.properties');
+      expect(props[1].path).to.equal('libloc/biz/biz.properties');
     }).then(done, done);
   });
 
@@ -87,7 +87,7 @@ describe('The discovery function', done => {
 
     discoverProps('libloc').then(props => {
       expect(props.every(f => {
-        return f.mainPath.match(/\.properties$/);
+        return f.path.match(/\.properties$/);
       })).to.equal(true);
     }).then(done, done);
   });

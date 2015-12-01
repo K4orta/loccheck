@@ -14,7 +14,7 @@ module.exports = propFiles => {
         return loadProps(lang);
       })).then(langs => {
         resolve({
-          mainPath: file,
+          path: file,
           props: langs.find(lang => {
             return lang.path === file;
           }).props,

@@ -1,4 +1,4 @@
-var reporter = require('../reporter');
+var formatReport = require('../reporter');
 
 describe('the reporter', () => {
   before(() => {
@@ -19,5 +19,11 @@ describe('the reporter', () => {
     };
   });
 
-  it('generates a percent of languages translated');
+  it('returns an object with main file title', () => {
+    expect(formatReport(this.stub).title).to.equal('foo');
+  });
+
+  // it('generates a percent of languages translated', () => {
+  //   expect(formatReport(this.stub).).to.equal();
+  // });
 });
