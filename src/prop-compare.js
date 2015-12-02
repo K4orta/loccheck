@@ -1,14 +1,18 @@
 module.exports = (setA, setB) => {
   var setATotalKeys = Object.keys(setA).length;
   if (setATotalKeys === 0) {
-    return 1;
+    return {completion: 1, missing: []};
   }
-  var foundKeys = 0;
+  var missing = [];
   Object.keys(setA).forEach(k => {
-    if (setB[k] !== undefined) {
-      foundKeys += 1;
+    if (setB[k] === undefined) {
+      missing.push(k);
     }
   });
 
-  return foundKeys / setATotalKeys;
+  var foundKeys = setATotalKeys - missing.length;
+  return {
+    completion: foundKeys / setATotalKeys,
+    missing: missing
+  };
 };
