@@ -18,7 +18,7 @@ describe('the command runner', () => {
   });
 
   it('prints "Hello World" to the output argument', done => {
-    cmd(this.output, '.').then(() => {
+    cmd('.', this.output).then(() => {
       var out = this.buffer;
       expect(out).to.equal('Hello World\n');
     }).then(done, done);

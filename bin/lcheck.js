@@ -3,7 +3,7 @@
 var discover = require('../src/discover');
 var reporter = require('../src/reporter');
 
-module.exports = (out, workdir) => {
+module.exports = (workdir, out) => {
   return discover(workdir)
     .then(props => {
       props.forEach(prop => {
@@ -11,7 +11,5 @@ module.exports = (out, workdir) => {
         console.log(rp);
       });
       out.write('Hello World\n');
-    }).catch(err => {
-      console.log(err);
     });
 };

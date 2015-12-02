@@ -67,4 +67,12 @@ describe('the reporter', () => {
   it('generates an overall coverage percent', () => {
     expect(formatReport(this.stub).completion).to.equal(0.75);
   });
+
+  it('includes a list of missing props for each language', () => {
+    var report = formatReport(this.stub);
+    var es = report.langs.find(lang => {
+      return lang.title === 'es_MX';
+    });
+    expect(es.missing).to.contain('foo.prop.description');
+  });
 });

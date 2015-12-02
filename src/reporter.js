@@ -13,7 +13,8 @@ module.exports = props => {
     return {
       title: langName,
       path: lng.path,
-      completion: propStats.completion
+      completion: propStats.completion,
+      missing: propStats.missing
     };
   });
 
