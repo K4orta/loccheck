@@ -2,14 +2,15 @@
 
 var discover = require('../src/discover');
 var reporter = require('../src/reporter');
+var prettyPrint = require('../src/pretty-print');
 
 module.exports = (workdir, out) => {
   return discover(workdir)
     .then(props => {
-      props.forEach(prop => {
-        var rp = reporter(prop);
-        console.log(rp);
+      var reports = props.map(prop => {
+        return reporter(prop);
       });
-      out.write('Hello World\n');
+
+      out.write(prettyPrint(reports));
     });
 };

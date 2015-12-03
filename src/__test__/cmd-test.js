@@ -17,10 +17,11 @@ describe('the command runner', () => {
     mock.restore();
   });
 
-  it('prints "Hello World" to the output argument', done => {
+  it('prints the file titles and completion to the output argument', done => {
     cmd('.', this.output).then(() => {
       var out = this.buffer;
-      expect(out).to.equal('Hello World\n');
+      expect(out).to.contain('common: 100%');
+      expect(out).to.contain('uncommon: 50%');
     }).then(done, done);
   });
 });
